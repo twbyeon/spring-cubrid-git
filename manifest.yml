@@ -1,0 +1,6 @@
+---
+applications:
+- name: hello-spring-cubrid
+  memory: 512M
+  instances: 1
+  path: target/hello-spring-cubrid-1.0.0-BUILD-SNAPSHOT.war

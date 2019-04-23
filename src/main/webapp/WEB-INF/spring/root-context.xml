@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:cloud="http://www.springframework.org/schema/cloud"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+			http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://${cloud.services.instance_mysql.connection.hostname}:${cloud.services.instance_mysql.connection.port}/${cloud.services.instance_mysql.connection.name}?characterEncoding=UTF-8"/>
+        <property name="username" value="${cloud.services.instance_mysql.connection.username}"/>
+        <property name="password" value="${cloud.services.instance_mysql.connection.password}"/>
+    </bean> -->
+    
+    <bean id="dataSource" class="org.openpaas.commons.DataSource" destroy-method="close">
+	    <property name="driverClassName" value="cubrid.jdbc.driver.CUBRIDDriver"/>
+	    <!-- <property name="url" value="${cloud.services.cubDB.connection.uri}"/>
+	    <property name="username" value="${cloud.services.cubDB.connection.username}"/>
+	    <property name="password" value="${cloud.services.cubDB.connection.password}"/> -->
+	</bean>
+
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:db-schema.sql"/>
+	</jdbc:initialize-database>
+		
+</beans>
